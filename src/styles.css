@@ -1,0 +1,23 @@
+/* Stili globali: reset minimo e tema scuro del sito */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: #0f1117;
+  color: #e6e7eb;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.75rem;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
