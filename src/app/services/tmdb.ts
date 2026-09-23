@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { GenreListResponse } from '../models/genre.model';
-import { MovieListResponse } from '../models/movie.model';
+import { MovieDetail, MovieListResponse } from '../models/movie.model';
 
 // Service che contiene SOLO le chiamate HTTP verso TMDB.
 // Ogni metodo restituisce una Promise; lo stato resta nei componenti.
@@ -38,6 +38,17 @@ export class Tmdb {
     return firstValueFrom(
       this.http.get<MovieListResponse>(
         `${this.apiUrl}/discover/movie?with_genres=${genreId}&sort_by=popularity.desc&language=it-IT`,
+        this.options,
+      ),
+    );
+  }
+
+  // Scheda di un film. append_to_response=credits aggiunge cast e crew
+  // nella stessa risposta, così basta una sola chiamata.
+  getMovieDetail(id: number): Promise<MovieDetail> {
+    return firstValueFrom(
+      this.http.get<MovieDetail>(
+        `${this.apiUrl}/movie/${id}?append_to_response=credits&language=it-IT`,
         this.options,
       ),
     );
