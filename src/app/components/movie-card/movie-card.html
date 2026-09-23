@@ -1,0 +1,16 @@
+<!-- routerLink con un array: ['/film', id] diventa l'indirizzo /film/123 -->
+<a class="card" [routerLink]="['/film', movie().id]">
+  @if (movie().poster_path) {
+    <img [src]="imageUrl + '/w342' + movie().poster_path" [alt]="movie().title" />
+  } @else {
+    <div class="no-poster">Nessuna immagine</div>
+  }
+
+  <div class="info">
+    <h3>{{ movie().title }}</h3>
+    <p class="meta">
+      {{ movie().release_date ? (movie().release_date | date: 'yyyy') : 'Data n.d.' }}
+      · ⭐ {{ movie().vote_average | number: '1.1-1' }}
+    </p>
+  </div>
+</a>
