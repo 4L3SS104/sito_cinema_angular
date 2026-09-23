@@ -2,20 +2,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
-import { PopularMovies } from './popular-movies';
+import { MoviesByGenre } from './movies-by-genre';
 
-describe('PopularMovies', () => {
-  let component: PopularMovies;
-  let fixture: ComponentFixture<PopularMovies>;
+describe('MoviesByGenre', () => {
+  let component: MoviesByGenre;
+  let fixture: ComponentFixture<MoviesByGenre>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PopularMovies],
+      imports: [MoviesByGenre],
       // Nel test le chiamate HTTP sono finte: nessuna richiesta reale a TMDB.
       providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PopularMovies);
+    fixture = TestBed.createComponent(MoviesByGenre);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

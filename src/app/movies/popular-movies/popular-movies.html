@@ -1,3 +1,8 @@
+<nav class="sottomenu">
+  <a routerLink="/film" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Popolari</a>
+  <a routerLink="/film/genere" routerLinkActive="active">Per genere</a>
+</nav>
+
 <h1>Film popolari</h1>
 
 @if (loading()) {

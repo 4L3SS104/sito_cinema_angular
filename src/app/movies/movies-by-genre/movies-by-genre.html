@@ -1,0 +1,32 @@
+<nav class="sottomenu">
+  <a routerLink="/film" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Popolari</a>
+  <a routerLink="/film/genere" routerLinkActive="active">Per genere</a>
+</nav>
+
+<h1>Film per genere</h1>
+
+<label class="scelta">
+  Genere:
+  <select (change)="onGenreChange($event)" [disabled]="genres().length === 0">
+    <option value="" disabled [selected]="selectedGenreId() === null">Scegli un genere...</option>
+    @for (genre of genres(); track genre.id) {
+      <option [value]="genre.id">{{ genre.name }}</option>
+    }
+  </select>
+</label>
+
+@if (loading()) {
+  <p class="stato">Caricamento in corso...</p>
+} @else if (error()) {
+  <p class="stato errore">{{ error() }}</p>
+} @else if (selectedGenreId() === null) {
+  <p class="stato">Scegli un genere per vedere i film.</p>
+} @else {
+  <div class="griglia">
+    @for (movie of movies(); track movie.id) {
+      <app-movie-card [movie]="movie" />
+    } @empty {
+      <p class="stato">Nessun film trovato per questo genere.</p>
+    }
+  </div>
+}

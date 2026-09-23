@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MovieCard } from '../../components/movie-card/movie-card';
 import { Movie } from '../../models/movie.model';
 import { Tmdb } from '../../services/tmdb';
@@ -6,7 +7,7 @@ import { Tmdb } from '../../services/tmdb';
 // Vista "Film popolari": possiede lo stato (caricamento, errore, film)
 // e passa ogni film al componente di presentazione MovieCard.
 @Component({
-  imports: [MovieCard],
+  imports: [MovieCard, RouterLink, RouterLinkActive],
   selector: 'app-popular-movies',
   styleUrl: './popular-movies.css',
   templateUrl: './popular-movies.html',
