@@ -1,0 +1,14 @@
+<a class="card" [routerLink]="['/persona', personId()]">
+  @if (profilePath()) {
+    <img [src]="imageUrl + '/w185' + profilePath()" [alt]="name()" />
+  } @else {
+    <div class="no-foto">?</div>
+  }
+
+  <div class="info">
+    <p class="nome">{{ name() }}</p>
+    @if (role()) {
+      <p class="ruolo">{{ role() }}</p>
+    }
+  </div>
+</a>
