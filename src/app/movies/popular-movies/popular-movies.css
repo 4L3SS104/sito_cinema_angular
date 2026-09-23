@@ -1,0 +1,23 @@
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.stato {
+  color: #8a8d99;
+}
+
+.errore {
+  color: #ff6b6b;
+}
+
+button {
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #f5c518;
+  color: #14161d;
+  font-weight: bold;
+  cursor: pointer;
+}

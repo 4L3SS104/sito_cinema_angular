@@ -1,0 +1,16 @@
+<h1>Film popolari</h1>
+
+@if (loading()) {
+  <p class="stato">Caricamento in corso...</p>
+} @else if (error()) {
+  <p class="stato errore">{{ error() }}</p>
+  <button (click)="loadMovies()">Riprova</button>
+} @else {
+  <div class="griglia">
+    @for (movie of movies(); track movie.id) {
+      <app-movie-card [movie]="movie" />
+    } @empty {
+      <p class="stato">Nessun film trovato.</p>
+    }
+  </div>
+}
