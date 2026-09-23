@@ -1,20 +1,50 @@
-/* Stili globali: reset minimo e tema scuro del sito */
+/* Stili globali: reset minimo e tema steampunk del sito */
+
+/* NUOVO rispetto alla lezione: variabili CSS (custom properties).
+   Si definiscono una volta in :root e si usano ovunque con var(--nome),
+   anche dentro il CSS dei componenti. Cambiando un colore qui,
+   cambia in tutto il sito. */
+:root {
+  --ottone: #c9a227;
+  --ottone-chiaro: #e8c872;
+  --rame: #b87333;
+  --bronzo: #7a5230;
+  --legno: #1e140c;
+  --pelle: #3b2616;
+  --pelle-chiara: #54371f;
+  --pergamena: #efe3c8;
+  --testo-tenue: #b9a582;
+  --ruggine: #d0613c;
+  --font-titoli: 'IM Fell English SC', Georgia, serif;
+  --font-testo: 'EB Garamond', Georgia, serif;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  background: #0f1117;
-  color: #e6e7eb;
+  font-family: var(--font-testo);
+  font-size: 1.05rem;
+  color: var(--pergamena);
   line-height: 1.5;
+  /* Legno scuro con una leggera luce al centro e venature diagonali */
+  background:
+    radial-gradient(ellipse at top, rgba(201, 162, 39, 0.12), transparent 60%),
+    repeating-linear-gradient(115deg, rgba(0, 0, 0, 0.08) 0 2px, transparent 2px 9px),
+    var(--legno);
+  background-attachment: fixed;
 }
 
 h1,
 h2,
 h3 {
   margin: 0 0 0.75rem;
+  font-family: var(--font-titoli);
+  font-weight: normal;
+  color: var(--ottone-chiaro);
+  letter-spacing: 0.03em;
 }
 
 img {

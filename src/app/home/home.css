@@ -4,12 +4,22 @@
 }
 
 .hero h1 {
-  font-size: 2.2rem;
-  color: #f5c518;
+  font-size: 2.6rem;
+  text-shadow: 0 2px 0 #000, 0 0 14px rgba(201, 162, 39, 0.35);
+}
+
+/* Ingranaggio decorativo in rame sotto il titolo */
+.hero h1::after {
+  content: '⚙';
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 1.4rem;
+  color: var(--rame);
 }
 
 .hero p {
-  color: #b5b8c4;
+  color: var(--testo-tenue);
+  font-style: italic;
 }
 
 .sezioni {
@@ -19,23 +29,30 @@
   margin-top: 1rem;
 }
 
+/* Card come pannelli di pelle con cornice in ottone e 4 rivetti agli angoli */
 .card {
   display: block;
   padding: 1.5rem;
-  background: #1a1d26;
-  border: 1px solid #2a2d38;
-  border-radius: 10px;
   color: inherit;
   text-decoration: none;
-  transition: transform 0.15s, border-color 0.15s;
+  border: 2px solid var(--bronzo);
+  border-radius: 6px;
+  background:
+    radial-gradient(circle at 10px 10px, var(--ottone) 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 10px) 10px, var(--ottone) 3px, transparent 4px),
+    radial-gradient(circle at 10px calc(100% - 10px), var(--ottone) 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 10px) calc(100% - 10px), var(--ottone) 3px, transparent 4px),
+    linear-gradient(160deg, var(--pelle-chiara), var(--pelle));
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s, border-color 0.2s;
 }
 
 .card:hover {
   transform: translateY(-3px);
-  border-color: #f5c518;
+  border-color: var(--ottone);
 }
 
 .card p {
   margin: 0;
-  color: #b5b8c4;
+  color: var(--testo-tenue);
 }
