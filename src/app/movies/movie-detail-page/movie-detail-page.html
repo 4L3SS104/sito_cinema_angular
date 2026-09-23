@@ -1,0 +1,62 @@
+@if (loading()) {
+  <p class="stato">Caricamento in corso...</p>
+} @else if (error()) {
+  <p class="stato errore">{{ error() }}</p>
+} @else if (movie(); as m) {
+  @if (m.backdrop_path) {
+    <img class="sfondo" [src]="imageUrl + '/w1280' + m.backdrop_path" alt="" />
+  }
+
+  <section class="scheda">
+    @if (m.poster_path) {
+      <img class="poster" [src]="imageUrl + '/w500' + m.poster_path" [alt]="m.title" />
+    }
+
+    <div class="testo">
+      <h1>{{ m.title }}</h1>
+      @if (m.tagline) {
+        <p class="tagline">“{{ m.tagline }}”</p>
+      }
+
+      <p class="meta">
+        {{ m.release_date ? (m.release_date | date: 'dd/MM/yyyy') : 'Data n.d.' }}
+        @if (m.runtime) {
+          · {{ m.runtime }} min
+        }
+        · ⭐ {{ m.vote_average | number: '1.1-1' }}
+      </p>
+
+      <div class="generi">
+        @for (genre of m.genres; track genre.id) {
+          <span class="genere">{{ genre.name }}</span>
+        }
+      </div>
+
+      <h2>Trama</h2>
+      <p>{{ m.overview ? m.overview : 'Trama non disponibile in italiano.' }}</p>
+
+      @if (directors().length > 0) {
+        <h2>Regia</h2>
+        <p>
+          @for (director of directors(); track director.credit_id) {
+            <span class="regista">{{ director.name }}</span>
+          }
+        </p>
+      }
+    </div>
+  </section>
+
+  <h2>Cast</h2>
+  <div class="griglia">
+    @for (actor of cast(); track actor.credit_id) {
+      <app-person-card
+        [personId]="actor.id"
+        [name]="actor.name"
+        [role]="actor.character"
+        [profilePath]="actor.profile_path"
+      />
+    } @empty {
+      <p class="stato">Cast non disponibile.</p>
+    }
+  </div>
+}
