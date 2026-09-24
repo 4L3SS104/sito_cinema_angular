@@ -1,0 +1,15 @@
+<a class="card" [routerLink]="['/serie', show().id]">
+  @if (show().poster_path) {
+    <img [src]="imageUrl + '/w342' + show().poster_path" [alt]="show().name" />
+  } @else {
+    <div class="no-poster">Nessuna immagine</div>
+  }
+
+  <div class="info">
+    <h3>{{ show().name }}</h3>
+    <p class="meta">
+      {{ show().first_air_date ? (show().first_air_date | date: 'yyyy') : 'Data n.d.' }}
+      · ⭐ {{ show().vote_average | number: '1.1-1' }}
+    </p>
+  </div>
+</a>

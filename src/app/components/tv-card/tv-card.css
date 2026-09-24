@@ -1,0 +1,62 @@
+/* Card come una cornice di ottone attorno alla locandina (stessa grafica di MovieCard) */
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  border: 3px solid var(--bronzo);
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--pelle-chiara), var(--pelle));
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px) rotate(-0.5deg);
+  border-color: var(--ottone);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7), 0 0 10px rgba(201, 162, 39, 0.4);
+}
+
+img,
+.no-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-bottom: 2px solid var(--bronzo);
+}
+
+/* Leggero effetto seppia, che sparisce al passaggio del mouse */
+img {
+  filter: sepia(0.35) contrast(1.05);
+  transition: filter 0.2s;
+}
+
+.card:hover img {
+  filter: none;
+}
+
+.no-poster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: repeating-linear-gradient(45deg, var(--pelle) 0 10px, var(--pelle-chiara) 10px 20px);
+  color: var(--testo-tenue);
+  font-style: italic;
+}
+
+.info {
+  padding: 0.6rem 0.75rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.25rem;
+}
+
+.meta {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--testo-tenue);
+}
