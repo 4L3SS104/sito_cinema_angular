@@ -1,0 +1,72 @@
+@if (loading()) {
+  <p class="stato">Caricamento in corso...</p>
+} @else if (error()) {
+  <p class="stato errore">{{ error() }}</p>
+} @else if (person(); as p) {
+  <section class="scheda">
+    @if (p.profile_path) {
+      <img class="foto" [src]="imageUrl + '/w342' + p.profile_path" [alt]="p.name" />
+    } @else {
+      <div class="foto no-foto">?</div>
+    }
+
+    <div class="testo">
+      <h1>{{ p.name }}</h1>
+
+      <dl class="anagrafica">
+        <dt>Conosciuto per</dt>
+        <dd>{{ p.known_for_department }}</dd>
+
+        <dt>Nascita</dt>
+        <dd>
+          {{ p.birthday ? (p.birthday | date: 'dd/MM/yyyy') : 'Data non disponibile' }}
+          @if (p.place_of_birth) {
+            — {{ p.place_of_birth }}
+          }
+        </dd>
+
+        @if (p.deathday) {
+          <dt>Morte</dt>
+          <dd>{{ p.deathday | date: 'dd/MM/yyyy' }}</dd>
+        }
+      </dl>
+
+      <h2>Biografia</h2>
+      <p class="biografia">
+        {{ p.biography ? p.biography : 'Biografia non disponibile in italiano.' }}
+      </p>
+    </div>
+  </section>
+
+  <h2>Filmografia come interprete ({{ actingCredits().length }})</h2>
+  <ul class="filmografia">
+    @for (item of actingCredits(); track item.creditId) {
+      <li>
+        <span class="anno">{{ item.date ? (item.date | date: 'yyyy') : '—' }}</span>
+        <span class="tipo">{{ item.mediaType === 'movie' ? 'Film' : 'Serie' }}</span>
+        <a [routerLink]="[item.mediaType === 'movie' ? '/film' : '/serie', item.id]">{{ item.title }}</a>
+        @if (item.role) {
+          <span class="ruolo">come {{ item.role }}</span>
+        }
+      </li>
+    } @empty {
+      <li class="stato">Nessun ruolo come interprete.</li>
+    }
+  </ul>
+
+  @if (crewCredits().length > 0) {
+    <h2>Dietro le quinte ({{ crewCredits().length }})</h2>
+    <ul class="filmografia">
+      @for (item of crewCredits(); track item.creditId) {
+        <li>
+          <span class="anno">{{ item.date ? (item.date | date: 'yyyy') : '—' }}</span>
+          <span class="tipo">{{ item.mediaType === 'movie' ? 'Film' : 'Serie' }}</span>
+          <a [routerLink]="[item.mediaType === 'movie' ? '/film' : '/serie', item.id]">{{ item.title }}</a>
+          @if (item.role) {
+            <span class="ruolo">{{ item.role }}</span>
+          }
+        </li>
+      }
+    </ul>
+  }
+}

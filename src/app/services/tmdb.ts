@@ -4,6 +4,8 @@ import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { GenreListResponse } from '../models/genre.model';
 import { MovieDetail, MovieListResponse } from '../models/movie.model';
+import { Person, PersonCreditsResponse } from '../models/person.model';
+import { SearchResponse } from '../models/search.model';
 import { TvDetail, TvListResponse } from '../models/tv.model';
 
 // Service che contiene SOLO le chiamate HTTP verso TMDB.
@@ -86,6 +88,39 @@ export class Tmdb {
     return firstValueFrom(
       this.http.get<TvDetail>(
         `${this.apiUrl}/tv/${id}?append_to_response=credits&language=it-IT`,
+        this.options,
+      ),
+    );
+  }
+
+  // --- PERSONE ---
+
+  // Scheda di una persona: biografia e dati anagrafici.
+  getPerson(id: number): Promise<Person> {
+    return firstValueFrom(
+      this.http.get<Person>(`${this.apiUrl}/person/${id}?language=it-IT`, this.options),
+    );
+  }
+
+  // Filmografia di una persona: film e serie, sia come attore sia come troupe.
+  getPersonCredits(id: number): Promise<PersonCreditsResponse> {
+    return firstValueFrom(
+      this.http.get<PersonCreditsResponse>(
+        `${this.apiUrl}/person/${id}/combined_credits?language=it-IT`,
+        this.options,
+      ),
+    );
+  }
+
+  // --- RICERCA ---
+
+  // Ricerca unica: film, serie e persone insieme.
+  // NUOVO rispetto alla lezione: encodeURIComponent() trasforma il testo
+  // in una forma sicura per l'URL (es. spazi e "&" non rompono l'indirizzo).
+  searchMulti(query: string): Promise<SearchResponse> {
+    return firstValueFrom(
+      this.http.get<SearchResponse>(
+        `${this.apiUrl}/search/multi?query=${encodeURIComponent(query)}&language=it-IT`,
         this.options,
       ),
     );

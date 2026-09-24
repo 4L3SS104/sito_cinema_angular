@@ -1,0 +1,123 @@
+.scheda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+/* Ritratto in una cornice ovale di ottone, come un cammeo */
+.foto {
+  width: 220px;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border: 4px solid var(--ottone);
+  border-radius: 50% / 40%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8);
+  filter: sepia(0.35);
+}
+
+.no-foto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-titoli);
+  font-size: 4rem;
+  color: var(--bronzo);
+  background: var(--pelle);
+}
+
+.testo {
+  flex: 1;
+  min-width: 260px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  text-shadow: 0 2px 0 #000;
+}
+
+h2 {
+  margin-top: 1.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 2px solid var(--bronzo);
+}
+
+.anagrafica {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.3rem 1rem;
+  margin: 0;
+}
+
+.anagrafica dt {
+  font-family: var(--font-titoli);
+  color: var(--rame);
+}
+
+.anagrafica dd {
+  margin: 0;
+}
+
+/* pre-line: mantiene gli "a capo" dei paragrafi della biografia */
+.biografia {
+  white-space: pre-line;
+}
+
+.filmografia {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.filmografia li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.8rem;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px dashed var(--pelle-chiara);
+}
+
+.filmografia li:hover {
+  background: rgba(201, 162, 39, 0.08);
+}
+
+.anno {
+  min-width: 2.5rem;
+  font-family: var(--font-titoli);
+  color: var(--ottone);
+}
+
+/* Etichetta Film / Serie come una piccola targhetta */
+.tipo {
+  padding: 0 0.4rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--testo-tenue);
+  border: 1px solid var(--bronzo);
+  border-radius: 3px;
+}
+
+.filmografia a {
+  color: var(--pergamena);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.filmografia a:hover {
+  color: var(--ottone-chiaro);
+  text-decoration: underline;
+}
+
+.ruolo {
+  font-style: italic;
+  color: var(--testo-tenue);
+}
+
+.stato {
+  color: var(--testo-tenue);
+  font-style: italic;
+}
+
+.errore {
+  color: var(--ruggine);
+}

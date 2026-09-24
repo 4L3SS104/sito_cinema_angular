@@ -1,0 +1,58 @@
+<h1>Ricerca</h1>
+
+<div class="barra">
+  <!-- NUOVO rispetto alla lezione: (keydown.enter) è un evento da tastiera
+       filtrato: scatta solo quando si preme il tasto Invio. -->
+  <input
+    type="search"
+    placeholder="Cerca film, serie o persone..."
+    [value]="query()"
+    (input)="onQueryInput($event)"
+    (keydown.enter)="search()"
+  />
+  <button (click)="search()" [disabled]="query().trim() === '' || loading()">Cerca</button>
+</div>
+
+@if (loading()) {
+  <p class="stato">Ricerca in corso...</p>
+} @else if (error()) {
+  <p class="stato errore">{{ error() }}</p>
+} @else if (lastQuery() === null) {
+  <p class="stato">Scrivi un titolo o un nome e premi Invio.</p>
+} @else if (movies().length === 0 && shows().length === 0 && people().length === 0) {
+  <p class="stato">Nessun risultato per “{{ lastQuery() }}”.</p>
+} @else {
+  <p class="stato">Risultati per “{{ lastQuery() }}”</p>
+
+  @if (movies().length > 0) {
+    <h2>Film ({{ movies().length }})</h2>
+    <div class="griglia">
+      @for (movie of movies(); track movie.id) {
+        <app-movie-card [movie]="movie" />
+      }
+    </div>
+  }
+
+  @if (shows().length > 0) {
+    <h2>Serie TV ({{ shows().length }})</h2>
+    <div class="griglia">
+      @for (show of shows(); track show.id) {
+        <app-tv-card [show]="show" />
+      }
+    </div>
+  }
+
+  @if (people().length > 0) {
+    <h2>Persone ({{ people().length }})</h2>
+    <div class="griglia">
+      @for (person of people(); track person.id) {
+        <app-person-card
+          [personId]="person.id"
+          [name]="person.name"
+          [role]="person.department"
+          [profilePath]="person.profile_path"
+        />
+      }
+    </div>
+  }
+}
