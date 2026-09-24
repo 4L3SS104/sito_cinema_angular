@@ -4,6 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { GenreListResponse } from '../models/genre.model';
 import { MovieDetail, MovieListResponse } from '../models/movie.model';
+import { TvDetail, TvListResponse } from '../models/tv.model';
 
 // Service che contiene SOLO le chiamate HTTP verso TMDB.
 // Ogni metodo restituisce una Promise; lo stato resta nei componenti.
@@ -49,6 +50,42 @@ export class Tmdb {
     return firstValueFrom(
       this.http.get<MovieDetail>(
         `${this.apiUrl}/movie/${id}?append_to_response=credits&language=it-IT`,
+        this.options,
+      ),
+    );
+  }
+
+  // --- SERIE TV: stessi endpoint dei film, con "tv" al posto di "movie" ---
+
+  // Serie TV più popolari del momento.
+  getPopularTvShows(): Promise<TvListResponse> {
+    return firstValueFrom(
+      this.http.get<TvListResponse>(`${this.apiUrl}/tv/popular?language=it-IT`, this.options),
+    );
+  }
+
+  // Lista di tutti i generi delle serie TV (diversa da quella dei film).
+  getTvGenres(): Promise<GenreListResponse> {
+    return firstValueFrom(
+      this.http.get<GenreListResponse>(`${this.apiUrl}/genre/tv/list?language=it-IT`, this.options),
+    );
+  }
+
+  // Serie TV di un certo genere, ordinate per popolarità.
+  getTvShowsByGenre(genreId: number): Promise<TvListResponse> {
+    return firstValueFrom(
+      this.http.get<TvListResponse>(
+        `${this.apiUrl}/discover/tv?with_genres=${genreId}&sort_by=popularity.desc&language=it-IT`,
+        this.options,
+      ),
+    );
+  }
+
+  // Scheda di una serie TV con cast e crew nella stessa risposta.
+  getTvDetail(id: number): Promise<TvDetail> {
+    return firstValueFrom(
+      this.http.get<TvDetail>(
+        `${this.apiUrl}/tv/${id}?append_to_response=credits&language=it-IT`,
         this.options,
       ),
     );
