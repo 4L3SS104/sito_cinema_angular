@@ -1,0 +1,61 @@
+@if (loading()) {
+  <p class="stato">Caricamento in corso...</p>
+} @else if (error()) {
+  <p class="stato errore">{{ error() }}</p>
+} @else if (show(); as s) {
+  @if (s.backdrop_path) {
+    <img class="sfondo" [src]="imageUrl + '/w1280' + s.backdrop_path" alt="" />
+  }
+
+  <section class="scheda">
+    @if (s.poster_path) {
+      <img class="poster" [src]="imageUrl + '/w500' + s.poster_path" [alt]="s.name" />
+    }
+
+    <div class="testo">
+      <h1>{{ s.name }}</h1>
+      @if (s.tagline) {
+        <p class="tagline">“{{ s.tagline }}”</p>
+      }
+
+      <p class="meta">
+        {{ s.first_air_date ? 'Dal ' + (s.first_air_date | date: 'dd/MM/yyyy') : 'Data n.d.' }}
+        · {{ s.number_of_seasons }} {{ s.number_of_seasons === 1 ? 'stagione' : 'stagioni' }}
+        · {{ s.number_of_episodes }} episodi
+        · ⭐ {{ s.vote_average | number: '1.1-1' }}
+      </p>
+
+      <div class="generi">
+        @for (genre of s.genres; track genre.id) {
+          <span class="genere">{{ genre.name }}</span>
+        }
+      </div>
+
+      <h2>Trama</h2>
+      <p>{{ s.overview ? s.overview : 'Trama non disponibile in italiano.' }}</p>
+
+      @if (s.created_by.length > 0) {
+        <h2>Ideata da</h2>
+        <p>
+          @for (creator of s.created_by; track creator.credit_id) {
+            <span class="ideatore">{{ creator.name }}</span>
+          }
+        </p>
+      }
+    </div>
+  </section>
+
+  <h2>Cast</h2>
+  <div class="griglia">
+    @for (actor of cast(); track actor.credit_id) {
+      <app-person-card
+        [personId]="actor.id"
+        [name]="actor.name"
+        [role]="actor.character"
+        [profilePath]="actor.profile_path"
+      />
+    } @empty {
+      <p class="stato">Cast non disponibile.</p>
+    }
+  </div>
+}

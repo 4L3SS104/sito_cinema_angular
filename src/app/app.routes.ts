@@ -5,6 +5,7 @@ import { MoviesByGenre } from './movies/movies-by-genre/movies-by-genre';
 import { PopularMovies } from './movies/popular-movies/popular-movies';
 import { PopularTv } from './tv/popular-tv/popular-tv';
 import { TvByGenre } from './tv/tv-by-genre/tv-by-genre';
+import { TvDetailPage } from './tv/tv-detail-page/tv-detail-page';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -16,4 +17,6 @@ export const routes: Routes = [
   { path: 'film/:id', component: MovieDetailPage },
   { path: 'serie', component: PopularTv },
   { path: 'serie/genere', component: TvByGenre },
+  // Come per i film: 'serie/:id' va DOPO 'serie/genere'.
+  { path: 'serie/:id', component: TvDetailPage },
 ];

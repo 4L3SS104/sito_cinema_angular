@@ -1,0 +1,85 @@
+/* Immagine panoramica in alto, sfumata verso il legno della pagina */
+.sfondo {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border: 3px solid var(--bronzo);
+  border-radius: 6px;
+  filter: sepia(0.5) brightness(0.6);
+  mask-image: linear-gradient(to bottom, #000 50%, transparent);
+}
+
+.scheda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.poster {
+  width: 240px;
+  border: 4px solid var(--ottone);
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8);
+}
+
+.testo {
+  flex: 1;
+  min-width: 260px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.2rem;
+  text-shadow: 0 2px 0 #000;
+}
+
+h2 {
+  margin-top: 1.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 2px solid var(--bronzo);
+}
+
+.tagline {
+  margin: 0 0 0.5rem;
+  font-style: italic;
+  color: var(--rame);
+}
+
+.meta {
+  color: var(--testo-tenue);
+}
+
+.generi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Generi come piccole targhette di ottone */
+.genere {
+  padding: 0.1rem 0.7rem;
+  font-size: 0.9rem;
+  color: var(--legno);
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--ottone-chiaro), var(--ottone));
+}
+
+.ideatore + .ideatore::before {
+  content: ', ';
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 1rem;
+}
+
+.stato {
+  color: var(--testo-tenue);
+  font-style: italic;
+}
+
+.errore {
+  color: var(--ruggine);
+}
