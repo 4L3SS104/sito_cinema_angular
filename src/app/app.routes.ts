@@ -3,6 +3,7 @@ import { Home } from './home/home';
 import { MovieDetailPage } from './movies/movie-detail-page/movie-detail-page';
 import { MoviesByGenre } from './movies/movies-by-genre/movies-by-genre';
 import { PopularMovies } from './movies/popular-movies/popular-movies';
+import { PopularTv } from './tv/popular-tv/popular-tv';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -12,4 +13,5 @@ export const routes: Routes = [
   // /film/550 apre MovieDetailPage con id = "550".
   // Va DOPO 'film/genere', altrimenti "genere" verrebbe letto come un id.
   { path: 'film/:id', component: MovieDetailPage },
+  { path: 'serie', component: PopularTv },
 ];

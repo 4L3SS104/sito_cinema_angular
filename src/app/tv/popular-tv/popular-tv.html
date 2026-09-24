@@ -1,0 +1,21 @@
+<nav class="sottomenu">
+  <a routerLink="/serie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Popolari</a>
+  <a routerLink="/serie/genere" routerLinkActive="active">Per genere</a>
+</nav>
+
+<h1>Serie TV popolari</h1>
+
+@if (loading()) {
+  <p class="stato">Caricamento in corso...</p>
+} @else if (error()) {
+  <p class="stato errore">{{ error() }}</p>
+  <button (click)="loadShows()">Riprova</button>
+} @else {
+  <div class="griglia">
+    @for (show of shows(); track show.id) {
+      <app-tv-card [show]="show" />
+    } @empty {
+      <p class="stato">Nessuna serie trovata.</p>
+    }
+  </div>
+}
