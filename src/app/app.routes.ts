@@ -4,6 +4,7 @@ import { MovieDetailPage } from './movies/movie-detail-page/movie-detail-page';
 import { MoviesByGenre } from './movies/movies-by-genre/movies-by-genre';
 import { PopularMovies } from './movies/popular-movies/popular-movies';
 import { PopularTv } from './tv/popular-tv/popular-tv';
+import { TvByGenre } from './tv/tv-by-genre/tv-by-genre';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -14,4 +15,5 @@ export const routes: Routes = [
   // Va DOPO 'film/genere', altrimenti "genere" verrebbe letto come un id.
   { path: 'film/:id', component: MovieDetailPage },
   { path: 'serie', component: PopularTv },
+  { path: 'serie/genere', component: TvByGenre },
 ];
